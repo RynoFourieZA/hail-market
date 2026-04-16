@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import TaskHeader from "@/components/TaskHeader";
 import TaskDescription from "@/components/TaskDescription";
@@ -9,17 +8,15 @@ import TaskAttachments from "@/components/TaskAttachments";
 import TaskRequirements from "@/components/TaskRequirements";
 import AIAssistCard from "@/components/AIAssistCard";
 import TaskSidebar from "@/components/TaskSidebar";
-import ApplyModal from "@/components/ApplyModal";
 import { mockTasks, type Task } from "@/lib/mock-data";
 
 export default function TaskDetailsPage() {
   const params = useParams();
+  const router = useRouter();
   const taskId = params.id as string;
 
   // Find the task by ID
   const task = mockTasks.find((t) => t.id === taskId);
-
-  const [applyModalOpen, setApplyModalOpen] = useState(false);
 
   if (!task) {
     return (
@@ -49,7 +46,9 @@ export default function TaskDetailsPage() {
   };
 
   const handleApply = () => {
-    setApplyModalOpen(true);
+    if (task.type === "large") {
+      router.push(`/tasks/${taskId}/apply`);
+    }
   };
 
   return (
@@ -117,13 +116,6 @@ export default function TaskDetailsPage() {
           </div>
         </div>
       </main>
-
-      {/* Apply Modal */}
-      <ApplyModal
-        open={applyModalOpen}
-        onOpenChange={setApplyModalOpen}
-        task={task}
-      />
     </div>
   );
 }

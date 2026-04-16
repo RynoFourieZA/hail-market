@@ -77,7 +77,11 @@ export default function ApplyModal({
             <label className="block text-sm font-semibold text-on-surface">
               Estimated Completion Time
             </label>
-            <Select value={estimatedTime} onValueChange={setEstimatedTime}>
+            <Select value={estimatedTime} onValueChange={(value) => {
+              if (value !== null) {
+                setEstimatedTime(value);
+              }
+            }}>
               <SelectTrigger className="rounded-lg border border-outline-variant/30 bg-surface-container-lowest">
                 <SelectValue placeholder="Select time estimate" />
               </SelectTrigger>
