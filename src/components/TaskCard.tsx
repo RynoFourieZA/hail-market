@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { type Task } from "@/lib/mock-data";
 import { Sparkles } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Card } from "./ui/card";
 
 // ============================================================
 // TaskCard — Tonal layering, no-border design per APF
@@ -24,6 +26,9 @@ interface TaskCardProps {
 }
 
 export default function TaskCard({ task, size = "default" }: TaskCardProps) {
+
+   const router = useRouter()
+
   const handleAccept = (e: React.MouseEvent) => {
     e.preventDefault();
     console.log("Accepted", task.id);
@@ -32,10 +37,11 @@ export default function TaskCard({ task, size = "default" }: TaskCardProps) {
   const handleApply = (e: React.MouseEvent) => {
     e.preventDefault();
     console.log("Applied", task.id);
+    router.push(`/tasks/${task.id}`) // Navigate to task details page on apply
   };
 
   return (
-    <Link href={`/tasks/${task.id}`}>
+    <Card>
       <div className="flex h-full flex-col rounded-[1.5rem] bg-surface-container-lowest p-5 shadow-[0_40px_16px_rgba(11,28,48,0.06)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_40px_24px_rgba(11,28,48,0.1)]">
       {/* ---- Top row: Icon + Badges ---- */}
       <div className="mb-4 flex items-start justify-between">
@@ -147,7 +153,7 @@ export default function TaskCard({ task, size = "default" }: TaskCardProps) {
         </Button>
       )}
       </div>
-    </Link>
+    </Card>
   );
 }
 
