@@ -34,14 +34,48 @@ export default function ProposalForm({
   isLoading = false,
 }: ProposalFormProps) {
   const [proposal, setProposal] = useState("");
+  const [displayedText, setDisplayedText] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
   const [images, setImages] = useState<string[]>([]);
   const [links, setLinks] = useState<{ label: string; url: string }[]>([]);
   const [skills, setSkills] = useState<string[]>([]);
   const [deliveryTime, setDeliveryTime] = useState("");
   const [suggestedPrice, setSuggestedPrice] = useState("");
 
+  /**
+   * Typing animation effect
+   * Gradually inserts text character by character with variable speed
+   */
+  const typeText = async (fullText: string) => {
+    setIsTyping(true);
+    setDisplayedText("");
+    setProposal("");
+
+    for (let i = 0; i < fullText.length; i++) {
+      // Variable typing speed between 10-30ms for natural feel
+      const delay = Math.random() * 20 + 10;
+
+      // Add slight pause after periods for realism
+      if (fullText[i] === ".") {
+        await new Promise((resolve) => setTimeout(resolve, delay + 40));
+      } else {
+        await new Promise((resolve) => setTimeout(resolve, delay));
+      }
+
+      setDisplayedText((prev) => prev + fullText[i]);
+    }
+
+    // Set final proposal state
+    setProposal(fullText);
+    setDisplayedText("");
+    setIsTyping(false);
+  };
+
   const handlePopulateProposal = (formData: ProposalFormData) => {
-    setProposal(formData.proposal);
+    // Start typing animation for proposal
+    typeText(formData.proposal);
+
+    // Set other fields immediately
     setImages(formData.images);
     setLinks(formData.links);
     setSkills(formData.skills);
@@ -134,14 +168,40 @@ export default function ProposalForm({
           Explain why you're the best fit, how you will approach the task, and
           your relevant experience. Be detailed and professional.
         </p>
-        <Textarea
-          value={proposal}
-          onChange={(e) => setProposal(e.target.value)}
-          placeholder="Explain why you're the best fit, how you will approach the task, and your experience..."
-          className="min-h-44 rounded-lg border border-outline-variant/30 bg-surface-container-lowest p-3 text-sm text-on-surface placeholder:text-on-surface/40 focus:border-primary-hail focus:outline-none focus:ring-1 focus:ring-primary-hail"
-        />
-        <p className="mt-2 text-xs text-on-surface/50">
-          {proposal.length} characters
+        <div className="relative">
+          <Textarea
+            value={isTyping ? displayedText : proposal}
+            onChange={(e) => !isTyping && setProposal(e.target.value)}
+            placeholder="Explain why you're the best fit, how you will approach the task, and your experience..."
+            disabled={isTyping}
+            className="min-h-44 rounded-lg border border-outline-variant/30 bg-surface-container-lowest p-3 text-sm text-on-surface placeholder:text-on-surface/40 focus:border-primary-hail focus:outline-none focus:ring-1 focus:ring-primary-hail disabled:opacity-75"
+          />
+          {/* Blinking cursor effect while typing */}
+          {isTyping && (
+            <div className="absolute right-3 top-3 inline-block">
+              <style>{`
+                @keyframes blink {
+                  0%, 49% { opacity: 1; }
+                  50%, 100% { opacity: 0; }
+                }
+                .typing-cursor {
+                  display: inline-block;
+                  width: 2px;
+                  height: 1.25em;
+                  background-color: #004cca;
+                  margin-left: 0.125em;
+                  animation: blink 0.8s infinite;
+                }
+              `}</style>
+              <span className="typing-cursor" />
+            </div>
+          )}
+        </div>
+        <p className="mt-2 text-xs text-on-surface/50 flex items-center gap-2">
+          <span>
+            {isTyping ? displayedText.length : proposal.length} characters
+            {isTyping && " (typing...)"}
+          </span>
         </p>
       </div>
 
@@ -240,7 +300,7 @@ export default function ProposalForm({
       <div className="h-px bg-surface-container-low" />
 
       {/* AI Assist Section */}
-      <AIAssistProposal task={task} onGenerate={handlePopulateProposal} />
+      <AIAssistProposal task={task} onGenerate={handlePopulateProposal} isGenerating={isTyping} />
 
       <div className="h-px bg-surface-container-low" />
 

@@ -10,13 +10,17 @@ import { type ProposalFormData } from "@/components/ProposalForm";
 interface AIAssistProposalProps {
   task: Task;
   onGenerate: (formData: ProposalFormData) => void;
+  isGenerating?: boolean;
 }
 
 export default function AIAssistProposal({
   task,
   onGenerate,
+  isGenerating: isTyping = false,
 }: AIAssistProposalProps) {
   const [isGenerating, setIsGenerating] = useState(false);
+
+  const isDisabled = isTyping || isGenerating;
 
   const handleGenerateClick = async () => {
     setIsGenerating(true);
@@ -46,11 +50,15 @@ export default function AIAssistProposal({
           </p>
           <Button
             onClick={handleGenerateClick}
-            disabled={isGenerating}
+            disabled={isDisabled}
             className="rounded-lg bg-gradient-to-135 from-primary-hail to-primary-container px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:shadow-[0_8px_16px_rgba(0,76,202,0.2)] disabled:opacity-50"
           >
             <Sparkles className="mr-2 h-4 w-4" />
-            {isGenerating ? "Generating..." : "Generate Proposal"}
+            {isGenerating
+              ? "Generating..."
+              : isTyping
+                ? "Typing..."
+                : "Generate Proposal"}
           </Button>
         </div>
       </div>
