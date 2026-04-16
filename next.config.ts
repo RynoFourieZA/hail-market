@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: "miro.medium.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "pixabay.com",
+        pathname: "/**",
+      },
     ],
   },
   async redirects() {

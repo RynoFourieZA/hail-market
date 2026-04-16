@@ -40,6 +40,17 @@ export default function ProposalForm({
   const [deliveryTime, setDeliveryTime] = useState("");
   const [suggestedPrice, setSuggestedPrice] = useState("");
 
+  const handlePopulateProposal = (formData: ProposalFormData) => {
+    setProposal(formData.proposal);
+    setImages(formData.images);
+    setLinks(formData.links);
+    setSkills(formData.skills);
+    setDeliveryTime(formData.deliveryTime);
+    if (formData.suggestedPrice) {
+      setSuggestedPrice(formData.suggestedPrice.toString());
+    }
+  };
+
   const handleAddLink = (label: string, url: string) => {
     setLinks([...links, { label, url }]);
   };
@@ -229,7 +240,7 @@ export default function ProposalForm({
       <div className="h-px bg-surface-container-low" />
 
       {/* AI Assist Section */}
-      <AIAssistProposal onGenerate={handleGenerateProposal} />
+      <AIAssistProposal task={task} onGenerate={handlePopulateProposal} />
 
       <div className="h-px bg-surface-container-low" />
 

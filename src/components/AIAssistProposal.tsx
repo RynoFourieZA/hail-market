@@ -1,13 +1,35 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
+import { generateProposalData } from "@/lib/proposal-generator";
+import { type Task } from "@/lib/mock-data";
+import { type ProposalFormData } from "@/components/ProposalForm";
 
 interface AIAssistProposalProps {
-  onGenerate: () => void;
+  task: Task;
+  onGenerate: (formData: ProposalFormData) => void;
 }
 
-export default function AIAssistProposal({ onGenerate }: AIAssistProposalProps) {
+export default function AIAssistProposal({
+  task,
+  onGenerate,
+}: AIAssistProposalProps) {
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const handleGenerateClick = async () => {
+    setIsGenerating(true);
+    // Simulate AI generation delay
+    await new Promise((resolve) => setTimeout(resolve, 800));
+
+    const proposalData = generateProposalData(task);
+    console.log("Generated proposal data:", proposalData);
+    onGenerate(proposalData);
+
+    setIsGenerating(false);
+  };
+
   return (
     <div className="rounded-2xl bg-gradient-to-br from-tertiary-fixed-dim/20 to-surface-container-low p-6 border border-tertiary-fixed-dim/30">
       <div className="flex items-start gap-4">
@@ -23,11 +45,12 @@ export default function AIAssistProposal({ onGenerate }: AIAssistProposalProps) 
             your skills and experience. It will enhance clarity and professionalism.
           </p>
           <Button
-            onClick={onGenerate}
-            className="rounded-lg bg-primary-hail px-4 py-4 text-sm font-semibold text-white shadow-sm transition-all hover:shadow-[0_8px_16px_rgba(0,76,202,0.2)]"
+            onClick={handleGenerateClick}
+            disabled={isGenerating}
+            className="rounded-lg bg-gradient-to-135 from-primary-hail to-primary-container px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:shadow-[0_8px_16px_rgba(0,76,202,0.2)] disabled:opacity-50"
           >
             <Sparkles className="mr-2 h-4 w-4" />
-            Generate Proposal
+            {isGenerating ? "Generating..." : "Generate Proposal"}
           </Button>
         </div>
       </div>
