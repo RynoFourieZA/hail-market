@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import Header from "@/components/Header";
 import TaskHeader from "@/components/TaskHeader";
 import TaskDescription from "@/components/TaskDescription";
+import TaskAttachments from "@/components/TaskAttachments";
 import TaskRequirements from "@/components/TaskRequirements";
 import AIAssistCard from "@/components/AIAssistCard";
 import TaskSidebar from "@/components/TaskSidebar";
@@ -66,6 +67,9 @@ export default function TaskDetailsPage() {
 
             {/* Task Description */}
             <TaskDescription task={task} />
+
+            {/* Task Attachments (Images & Links) */}
+            <TaskAttachments task={task} />
 
             {/* Task Requirements */}
             <TaskRequirements task={task} />

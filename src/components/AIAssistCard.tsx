@@ -24,7 +24,7 @@ export default function AIAssistCard({ onGenerate }: AIAssistCardProps) {
           </p>
           <Button
             onClick={onGenerate}
-            className="rounded-lg bg-gradient-to-135 from-primary-hail to-primary-container px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:shadow-[0_8px_16px_rgba(0,76,202,0.2)]"
+            className="rounded-lg bg-primary-hail to-primary-container px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:shadow-[0_8px_16px_rgba(0,76,202,0.2)]"
           >
             <Sparkles className="mr-2 h-4 w-4" />
             Generate with AI

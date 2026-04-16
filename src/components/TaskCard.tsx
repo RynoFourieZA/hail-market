@@ -134,14 +134,14 @@ export default function TaskCard({ task, size = "default" }: TaskCardProps) {
       {task.type === "micro" ? (
         <Button
           onClick={handleAccept}
-          className="w-full rounded-xl bg-gradient-to-135 from-primary-hail to-primary-container py-2.5 text-sm font-semibold text-white transition-all hover:shadow-[0_8px_16px_rgba(0,76,202,0.2)]"
+          className="w-full rounded-xl bg-primary-hail to-primary-container py-4 text-sm font-semibold text-white transition-all hover:shadow-[0_8px_16px_rgba(0,76,202,0.2)]"
         >
           Accept Task
         </Button>
       ) : (
         <Button
           onClick={handleApply}
-          className="w-full rounded-xl bg-gradient-to-135 from-primary-hail to-primary-container py-2.5 text-sm font-semibold text-white transition-all hover:shadow-[0_8px_16px_rgba(0,76,202,0.2)]"
+          className="w-full rounded-xl bg-primary-hail to-primary-container py-4 text-sm font-semibold text-white transition-all hover:shadow-[0_8px_16px_rgba(0,76,202,0.2)]"
         >
           Apply for Task
         </Button>

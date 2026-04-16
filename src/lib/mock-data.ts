@@ -42,6 +42,10 @@ export interface Task {
   deadline?: string;
   /** Payment type: fixed or per-result */
   paymentType?: "fixed" | "per-result";
+  /** Images to display in the task (URLs) */
+  images?: string[];
+  /** Links/resources for the task */
+  links?: { label: string; url: string }[];
 }
 
 export const CATEGORIES = [
@@ -102,6 +106,16 @@ Quality assurance is built into our process, with spot-checks on 10% of submissi
     applicants: 12,
     deadline: "2 days",
     paymentType: "fixed",
+    images: [
+      "https://miro.medium.com/v2/1*SkRixKiPnXpJGlrTzyDtXg.png",
+      "https://miro.medium.com/v2/1*SkRixKiPnXpJGlrTzyDtXg.png",
+      "https://miro.medium.com/v2/1*SkRixKiPnXpJGlrTzyDtXg.png"
+    ],
+    links: [
+      { label: "Labeling Guide (PDF)", url: "https://example.com/labeling-guide.pdf" },
+      { label: "Sample Dataset", url: "https://example.com/samples" },
+      { label: "Classification Schema", url: "https://example.com/schema" },
+    ],
   },
   {
     id: "2",

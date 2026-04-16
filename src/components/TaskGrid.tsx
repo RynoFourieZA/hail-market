@@ -3,7 +3,7 @@
 import TaskCard from "@/components/TaskCard";
 import PremiumTaskCard from "@/components/PremiumTaskCard";
 import { type Task } from "@/lib/mock-data";
-import { Inbox, ChevronDown } from "lucide-react";
+import { ChevronDown, Inbox } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 // ============================================================
@@ -19,6 +19,8 @@ interface TaskGridProps {
 }
 
 export default function TaskGrid({ tasks, totalCount }: TaskGridProps) {
+  const formattedTotalCount = new Intl.NumberFormat("en-US").format(totalCount);
+
   // Empty state
   if (tasks.length === 0) {
     return (
@@ -97,7 +99,7 @@ export default function TaskGrid({ tasks, totalCount }: TaskGridProps) {
           <ChevronDown className="ml-2 h-4 w-4" />
         </Button>
         <p className="text-xs text-on-surface/50">
-          Showing {tasks.length} of {totalCount.toLocaleString()} available
+          Showing {tasks.length} of {formattedTotalCount} available
           opportunities for your level.
         </p>
       </div>
