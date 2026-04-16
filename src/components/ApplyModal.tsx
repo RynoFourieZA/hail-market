@@ -48,7 +48,7 @@ export default function ApplyModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg rounded-2xl bg-base-background">
+      <DialogContent className="max-w-lg rounded-2xl bg-white p-6">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-on-surface font-display">
             Apply for Task
@@ -119,7 +119,7 @@ export default function ApplyModal({
           <Button
             onClick={handleSubmit}
             disabled={!proposal.trim() || !estimatedTime || isSubmitting}
-            className="flex-1 rounded-lg bg-gradient-to-135 from-primary-hail to-primary-container py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:shadow-[0_8px_16px_rgba(0,76,202,0.2)] disabled:opacity-50"
+            className="flex-1 rounded-lg bg-gradient-to-135 from-primary-hail to-primary-container py-2.5 text-sm text-on-surface font-semibold shadow-sm transition-all hover:shadow-[0_8px_16px_rgba(0,76,202,0.2)] disabled:opacity-50"
           >
             {isSubmitting ? "Submitting..." : "Submit Application"}
           </Button>

@@ -86,7 +86,7 @@ export default function PremiumTaskCard({ task }: PremiumTaskCardProps) {
       {/* ---- Apply button — Glassmorphism style ---- */}
       <Button
         onClick={handleApply}
-        className="w-full rounded-xl border-2 border-white/30 bg-white/10 py-2.5 text-sm font-semibold text-white transition-all backdrop-blur-sm hover:border-white/60 hover:bg-white/20"
+        className="w-full bg-primary-hail rounded-xl border-2 border-white/30 bg-white/10 py-2.5 text-sm font-semibold text-white transition-all backdrop-blur-sm hover:border-white/60 hover:bg-white/20"
       >
         Apply for Task
       </Button>

@@ -129,7 +129,7 @@ export default function TaskSidebar({
         {task.type === "micro" ? (
           <Button
             onClick={onAccept}
-            className="w-full rounded-xl bg-gradient-to-135 from-primary-hail to-primary-container py-3 text-sm font-semibold text-white shadow-sm transition-all hover:shadow-[0_8px_16px_rgba(0,76,202,0.2)]"
+            className="w-full rounded-xl bg-primary-hail py-4 text-sm font-semibold text-white shadow-sm transition-all hover:shadow-[0_8px_16px_rgba(0,76,202,0.2)]"
           >
             <CheckCircle2 className="mr-2 h-4 w-4" />
             Accept Task
@@ -138,7 +138,7 @@ export default function TaskSidebar({
           <>
             <Button
               onClick={onApply}
-              className="w-full rounded-xl bg-gradient-to-135 from-primary-hail to-primary-container py-3 text-sm font-semibold text-white shadow-sm transition-all hover:shadow-[0_8px_16px_rgba(0,76,202,0.2)]"
+              className="w-full rounded-xl bg-primary-hail py-4 text-sm font-semibold text-white shadow-sm transition-all hover:shadow-[0_8px_16px_rgba(0,76,202,0.2)]"
             >
               Apply for Task
             </Button>
